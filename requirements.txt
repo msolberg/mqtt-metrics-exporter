@@ -1,0 +1,5 @@
+awscrt
+awsiot
+awsiotsdk
+prometheus_client
+configparser
