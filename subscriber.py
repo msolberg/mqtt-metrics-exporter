@@ -45,7 +45,6 @@ def update_gauge(topic, k, v):
             #print("Making a new gauge")
             gauges[gauge_name] = Gauge(gauge_name, k)
             gauges[gauge_name].set(vf)
-            print(gauges)
     except ValueError:
         return
 
