@@ -15,6 +15,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('mqtt-metrics-exporter.ini')
 
+listen_port = int(config['DEFAULT']['port'])
 endpoint=config['broker']['endpoint']
 cert_filepath=config['broker']['cert_filepath']
 pri_key_filepath=config['broker']['pri_key_filepath']
@@ -101,7 +102,7 @@ def on_connection_closed(connection, callback_data):
 
 if __name__ == '__main__':
     # Start the status page
-    start_http_server(8001)
+    start_http_server(listen_port)
 
     # Create a MQTT connection from the command line data
     mqtt_connection = mqtt_connection_builder.mtls_from_path(
