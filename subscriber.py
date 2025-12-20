@@ -30,19 +30,19 @@ gauges = {}
 def update_gauge(topic, k, v):
     # Update an existing guage or create a new one with the value.
     global gauges
-    print("topic name: %s", (topic))
+    #print("topic name: %s", (topic))
     
     device = topic.split('/')[-1]
-    print("device name: %s", (device))
+    #print("device name: %s", (device))
     gauge_name = device + "_" + k
     
     try:
         vf = float(v)
         try:
-            print("Setting existing gauge")
+            #print("Setting existing gauge")
             gauges[gauge_name].set(vf)
         except KeyError:
-            print("Making a new gauge")
+            #print("Making a new gauge")
             gauges[gauge_name] = Gauge(gauge_name, k)
             gauges[gauge_name].set(vf)
             print(gauges)
@@ -79,7 +79,7 @@ def on_message_received(topic, payload, dup, qos, retain, **kwargs):
     
     try:
         data = json.loads(payload)
-        print("Got payload %s"% (payload,))
+        #print("Got payload %s"% (payload,))
         for k in data.keys():
             update_gauge(topic, k, data[k])
     except json.decoder.JSONDecodeError:
